@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بيت شباب طرابلس | جمعية بيوت الشباب الليبية</title>
+<meta name="description" content="بيت شباب طرابلس، أحد بيوت جمعية بيوت الشباب الليبية المؤسسة سنة 1973، يرعى الشباب وينظم الأنشطة التطوعية والثقافية والاجتماعية.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: { cairo: ['Cairo', 'sans-serif'] } } }
+  }
+</script>
+
+<style>
+  #desktopNav, #desktopJoinBtn { display: none; }
+  @media (min-width: 1024px) {
+    #desktopNav { display: flex; }
+    #desktopJoinBtn { display: inline-block; }
+  }
+
+  html { overflow-x: hidden; }
+  body { overflow-x: visible; }
+  main, footer { overflow-x: clip; }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Cairo', sans-serif; }
+
+  section[id] { scroll-margin-top: 92px; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #ea580c; outline-offset: 3px; border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .loader-logo, .loader-ring, #scrollCue { animation: none !important; }
+    *, ::before, ::after { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+  }
+
+  #loader {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.62);
+    backdrop-filter: blur(26px) saturate(0);
+    -webkit-backdrop-filter: blur(26px) saturate(0);
+    transition: opacity .8s cubic-bezier(.22,1,.36,1), visibility .8s, backdrop-filter .8s ease;
+  }
+  #loader::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(17,24,39,.10) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 20%, transparent 100%);
+    mask-image: radial-gradient(50% 50% at 50% 50%, #000 20%, transparent 100%);
+  }
+  #loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+  #loader.is-done .loader-card { transform: translateY(-10px) scale(.97); opacity: 0; }
+
+  .loader-card {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center;
+    width: min(300px, calc(100vw - 48px));
+    padding: 34px 28px 26px;
+    background: rgba(255,255,255,.55);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 24px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 20px 50px -20px rgba(17,24,39,.25), 0 0 0 1px rgba(17,24,39,.04);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .6s ease;
+    animation: cardIn .7s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+  .loader-mark { position: relative; width: 76px; height: 76px; display: grid; place-items: center; }
+  .loader-ring { position: absolute; inset: 0; animation: ringSpin 1.6s linear infinite; }
+  .loader-ring circle { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+  .loader-ring .track { stroke: rgba(17,24,39,.08); }
+  .loader-ring .arc { stroke: #111827; stroke-dasharray: 60 180; }
+  @keyframes ringSpin { to { transform: rotate(360deg); } }
+  .loader-logo { width: 46px; height: 46px; object-fit: contain; animation: breathe 2.4s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  .loader-title { margin-top: 16px; color: #111827; font-weight: 800; font-size: 1rem; }
+  .loader-sub { margin-top: 2px; color: #9ca3af; font-size: 9px; font-weight: 600; letter-spacing: .12em; }
+
+  .loader-bar { margin-top: 20px; width: 100%; height: 3px; border-radius: 999px; background: rgba(17,24,39,.08); overflow: hidden; }
+  .loader-bar-fill { height: 100%; width: 100%; border-radius: inherit; background: #111827; transform-origin: right; transform: scaleX(0); will-change: transform; }
+  .loader-percent { margin-top: 10px; color: #6b7280; font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  #scrollProgress {
+    position: fixed; top: 0; right: 0; height: 3px; width: 0%;
+    background: #ea580c; z-index: 60; transition: width .1s linear;
+  }
+
+  .eyebrow { color: #ea580c; font-weight: 700; position: relative; display: inline-block; }
+  .eyebrow-start { padding-inline-start: 2rem; }
+  .eyebrow-start::before {
+    content: ''; position: absolute; top: 50%; inset-inline-start: 0;
+    width: 1.5rem; height: 4px; background: #f97316; border-radius: 999px; transform: translateY(-50%);
+  }
+  .eyebrow-center { padding-inline: 2rem; }
+  .eyebrow-center::before, .eyebrow-center::after {
+    content: ''; position: absolute; top: 50%; width: 1.5rem; height: 4px; background: #f97316; border-radius: 999px; transform: translateY(-50%);
+  }
+  .eyebrow-center::before { inset-inline-start: 0; }
+  .eyebrow-center::after { inset-inline-end: 0; }
+
+  .card-hover { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s cubic-bezier(.22,1,.36,1); }
+  .card-hover:hover { transform: translateY(-6px); }
+  .card-hover:active { transform: translateY(-2px) scale(.99); }
+
+  .img-zoom { overflow: hidden; cursor: pointer; }
+  .img-zoom img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .img-zoom:hover img { transform: scale(1.08); }
+
+  .social-btn { transition: all .3s cubic-bezier(.22,1,.36,1); }
+  .social-btn:hover { background-color: #ea580c; color: #fff !important; transform: translateY(-3px); }
+  .social-btn:active { transform: scale(.92); }
+
+  .nav-link { position: relative; transition: color .25s ease; }
+  .nav-link::after {
+    content: ''; position: absolute; right: 0; bottom: -6px;
+    width: 0; height: 2px; background: #ea580c; transition: width .35s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: #ea580c; }
+
+  #scrollCue {
+    animation: bounceCue 2.2s ease-in-out infinite;
+  }
+  @keyframes bounceCue { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(8px); opacity: 1; } }
+
+  #mainHeader { transition: box-shadow .3s ease, background-color .3s ease; }
+  #mainHeader.scrolled { box-shadow: 0 8px 24px -14px rgba(17,24,39,0.18); }
+
+  #menuOverlay {
+    position: fixed; inset: 0; background: rgba(17,24,39,.55);
+    opacity: 0; pointer-events: none; transition: opacity .35s ease; z-index: 45;
+  }
+  #menuOverlay.open { opacity: 1; pointer-events: auto; }
+  #mobileDrawer {
+    position: fixed; top: 0; bottom: 0; right: 0; width: 82%; max-width: 320px;
+    background: #fff; z-index: 50; transform: translateX(100%); visibility: hidden;
+    overflow-y: auto; overscroll-behavior: contain;
+    transition: transform .4s cubic-bezier(.22,.9,.32,1), visibility 0s linear .4s;
+    box-shadow: -10px 0 30px -10px rgba(0,0,0,.2);
+  }
+  #mobileDrawer.open { transform: translateX(0); visibility: visible; transition: transform .4s cubic-bezier(.22,.9,.32,1), visibility 0s; }
+
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(17,24,39,.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(60% 60% at 50% 0%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(60% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .polaroid {
+    border-radius: .9rem; border: 3px solid #fff; object-fit: cover;
+    box-shadow: 7px 8px 20px rgba(17,24,39,.15);
+  }
+
+  #backToTop {
+    position: fixed; bottom: 24px; left: 24px; z-index: 40;
+    width: 46px; height: 46px; border-radius: 9999px;
+    background: #ea580c; color: #fff; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 22px -6px rgba(234,88,12,0.5);
+    opacity: 0; pointer-events: none; transform: translateY(10px);
+    transition: all .35s ease;
+  }
+  #backToTop.show { opacity: 1; pointer-events: auto; }
+  #backToTop:hover { background-color: #c2410c; }
+
+  #lightbox {
+    position: fixed; inset: 0; background: rgba(10,14,20,.92); z-index: 70;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease;
+  }
+  #lightbox.open { opacity: 1; pointer-events: auto; }
+  #lightbox img { max-width: 100%; max-height: 88vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  #lightboxClose {
+    position: absolute; top: 20px; left: 20px; width: 44px; height: 44px; border-radius: 9999px;
+    background: rgba(255,255,255,.1); color: #fff; display: flex; align-items: center; justify-content: center;
+    transition: background .25s ease;
+  }
+  #lightboxClose:hover { background: #ea580c; }
+
+  ::selection { background: #fb923c; color: #fff; }
+</style>
+</head>
+
+<body class="bg-white text-gray-600 antialiased">
+
+  <div id="loader" role="status" aria-label="جاري تحميل الموقع">
+    <div class="loader-card">
+      <div class="loader-mark">
+        <svg class="loader-ring" viewBox="0 0 76 76" aria-hidden="true">
+          <circle class="track" cx="38" cy="38" r="36"/>
+          <circle class="arc" cx="38" cy="38" r="36"/>
+        </svg>
+        <img src="images/logo-mark-transparent.png" alt="" class="loader-logo">
+      </div>
+      <p class="loader-title">بيت شباب طرابلس</p>
+      <p class="loader-sub">LIBYAN YOUTH HOSTELS ASSOCIATION</p>
+      <div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div>
+      <p class="loader-percent" id="loaderPercent" dir="ltr">0%</p>
+    </div>
+  </div>
+
+  <div id="scrollProgress"></div>
+
+  <div class="bg-gray-900 text-white/70 text-xs md:text-sm">
+    <div class="max-w-6xl mx-auto px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-500"></i> طرابلس، ليبيا</span>
+        <span class="hidden sm:flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-500"></i> tripoliyouthhostels@gmail.com</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <a href="https://www.facebook.com/share/19LCNVLcBM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="فيسبوك" class="social-btn w-7 h-7 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-brands fa-facebook-f text-[11px]"></i></a>
+        <a href="https://www.tiktok.com/@tripoli.youth.hos?_r=1&_t=ZS-99y7iBDRoXf" target="_blank" rel="noopener" aria-label="تيك توك" class="social-btn w-7 h-7 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-brands fa-tiktok text-[11px]"></i></a>
+        <a href="https://youtube.com/@byootly?si=uIV-wqHK8crAoENZ" target="_blank" rel="noopener" aria-label="يوتيوب" class="social-btn w-7 h-7 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-brands fa-youtube text-[11px]"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <header id="mainHeader" class="bg-white sticky top-0 z-40">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+
+      <a href="#home" class="flex items-center gap-3 shrink-0">
+        <img src="images/logo-mark-transparent.png" alt="شعار جمعية بيوت الشباب الليبية" class="w-11 h-11 object-contain">
+        <div>
+          <h1 class="text-base font-extrabold text-gray-900 leading-tight">بيت شباب طرابلس</h1>
+          <p class="text-[10px] tracking-wider text-gray-400 font-semibold">LIBYAN YOUTH HOSTELS ASSOCIATION</p>
+        </div>
+      </a>
+
+      <ul id="desktopNav" class="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-900">
+        <li><a href="#home" class="nav-link">الرئيسية</a></li>
+        <li><a href="#about" class="nav-link">من نحن</a></li>
+        <li><a href="#join" class="nav-link">الانتساب</a></li>
+        <li><a href="#team" class="nav-link">الفريق</a></li>
+        <li><a href="#activities" class="nav-link">النشاطات</a></li>
+        <li><a href="#partners" class="nav-link">شركاؤنا</a></li>
+        <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+      </ul>
+
+      <a id="desktopJoinBtn" href="#join" class="hidden lg:inline-block rounded-full bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 active:scale-95 transition">
+        انضم إلينا
+      </a>
+
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-900 text-lg" aria-label="فتح القائمة">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <div id="menuOverlay"></div>
+  <aside id="mobileDrawer">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+      <span class="font-extrabold text-gray-900">القائمة</span>
+      <button id="drawerClose" class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-900" aria-label="إغلاق القائمة">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <ul class="flex flex-col gap-1 px-5 py-4 text-sm font-bold text-gray-900">
+      <li><a href="#home" class="drawer-link block py-2.5">الرئيسية</a></li>
+      <li><a href="#about" class="drawer-link block py-2.5">من نحن</a></li>
+      <li><a href="#join" class="drawer-link block py-2.5">الانتساب</a></li>
+      <li><a href="#team" class="drawer-link block py-2.5">الفريق</a></li>
+      <li><a href="#activities" class="drawer-link block py-2.5">النشاطات</a></li>
+      <li><a href="#partners" class="drawer-link block py-2.5">شركاؤنا</a></li>
+      <li><a href="#contact" class="drawer-link block py-2.5">تواصل معنا</a></li>
+      <li class="pt-3"><a href="#join" class="drawer-link block text-center bg-orange-600 text-white rounded-full py-2.5">انضم إلينا</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <section id="home" class="relative overflow-hidden">
+      <div id="heroDots" class="absolute inset-0 -z-10 h-[42rem] dot-grid"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 pt-16 pb-24 sm:pt-24 lg:pt-28">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+          <div data-aos="fade-right" data-aos-duration="900">
+            <span class="eyebrow eyebrow-start text-sm">جمعية بيوت الشباب الليبية — تأسست 1973</span>
+            <h2 class="mt-5 font-bold tracking-tight text-gray-900 !leading-tight text-[clamp(1.85rem,1.2rem+3vw,3rem)]">
+              بيت آمن، وروح شبابية تجمع أبناء طرابلس
+            </h2>
+            <p class="mt-6 text-base leading-9 text-gray-600 max-w-lg">
+              نوفّر بيئة إقامة آمنة ومحفزة، وننظّم برامج تطوعية وثقافية ورياضية تعزز روح الانتماء
+              والعمل الجماعي بين شباب طرابلس.
+            </p>
+            <div class="mt-9 flex flex-col sm:flex-row items-center gap-7">
+              <a href="#join" class="rounded-full bg-orange-600 px-7 py-3 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 active:scale-95 transition">
+                انضم إلينا الآن
+              </a>
+              <a href="#activities" class="text-sm font-bold text-gray-800 flex items-center gap-2 hover:text-orange-600 transition">
+                <span>شاهد أبرز نشاطاتنا</span>
+                <i class="fa-solid fa-arrow-left"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="flex justify-center lg:justify-end gap-4 sm:gap-6" dir="ltr">
+            <div class="flex flex-col gap-6 pt-10">
+              <div class="relative" data-aos="fade-left" data-aos-duration="700">
+                <img src="images/5879693581667212233.jpg" alt="طفل يشارك في مسابقة حفظ القرآن الكريم" class="polaroid w-28 sm:w-36 h-44 sm:h-56 transform -rotate-3">
+              </div>
+              <div class="relative" data-aos="fade-left" data-aos-duration="1100">
+                <img src="images/5879693581667212229.jpg" alt="متطوعون خلال حملة تشجير" class="polaroid w-28 sm:w-36 h-32 sm:h-40 transform rotate-2">
+              </div>
+            </div>
+            <div class="flex flex-col gap-6">
+              <div class="relative" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="images/5879693581667212227.jpg" alt="منتسبو بيت شباب طرابلس في حفل الذكرى 53" class="polaroid w-32 sm:w-40 h-56 sm:h-72 transform rotate-2">
+              </div>
+            </div>
+            <div class="hidden sm:flex flex-col gap-6 pt-16">
+              <div class="relative" data-aos="fade-down-left" data-aos-duration="900">
+                <img src="images/5879693581667212234.jpg" alt="حملة تراحموا لإفطار الصائمين" class="polaroid w-32 h-44 transform -rotate-2">
+              </div>
+              <div class="relative" data-aos="fade-up-left" data-aos-duration="1300">
+                <img src="images/5879693581667212232.jpg" alt="ورشة الأمن السيبراني" class="polaroid w-32 h-32 transform rotate-3">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <a id="scrollCue" href="#about" aria-label="مرر للأسفل لاكتشاف المزيد" class="hidden md:flex absolute bottom-6 inset-x-0 mx-auto w-9 h-9 rounded-full border border-gray-300 text-gray-400 hover:text-orange-600 hover:border-orange-300 items-center justify-center transition">
+        <i class="fa-solid fa-chevron-down text-xs"></i>
+      </a>
+    </section>
+
+    <section id="about" class="max-w-6xl mx-auto px-4 sm:px-8 pt-8 pb-28">
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+        <div>
+          <span class="eyebrow eyebrow-start text-sm" data-aos="fade-up">تعرّف علينا</span>
+          <h2 class="mt-4 text-gray-900 text-3xl font-bold max-w-md leading-normal" data-aos="fade-up">
+            عن جمعية بيوت الشباب الليبية
+          </h2>
+          <p class="mt-4 text-gray-700 leading-9" data-aos="fade-up">
+            جمعية بيوت الشباب الليبية جمعية أهلية تأسست في 14 فبراير 1973م بجامعة طرابلس، وتهدف إلى رعاية الشباب
+            وتنمية مهاراتهم، وتوفير الإقامة الآمنة والصحية لهم، وتنظيم البرامج والأنشطة الشبابية والثقافية
+            والاجتماعية والرياضية، وتعزيز العمل التطوعي والتبادل الشبابي محليًا ودوليًا. تضم الجمعية أكثر من
+            10,000 منتسب، وتنتشر بيوت الشباب التابعة لها في مختلف مناطق ليبيا.
+          </p>
+          <p class="mt-4 text-gray-700 leading-9" data-aos="fade-up">
+            <strong class="text-gray-900">بيت شباب طرابلس</strong> أحد بيوت الشباب التابعة للجمعية، ويهدف إلى توفير
+            بيئة آمنة ومناسبة للشباب، ودعم الأنشطة والبرامج الشبابية والثقافية والاجتماعية، وتعزيز التواصل والتبادل
+            بين الشباب من مختلف أنحاء ليبيا.
+          </p>
+
+          <a href="about-chairman.html" class="mt-6 flex items-center gap-4 bg-gray-50 hover:bg-orange-50 border border-gray-100 rounded-xl p-4 transition group" data-aos="fade-up">
+            <img src="images/chairman-alshebane.jpg" alt="الشيباني عبدالله الشيباني" class="w-14 h-14 rounded-full object-cover shrink-0">
+            <div class="flex-1">
+              <p class="text-sm font-bold text-gray-900">كلمة رئيس مجلس إدارة الجمعية</p>
+              <p class="text-xs text-gray-500">الشيباني عبدالله الشيباني بمناسبة الذكرى الخمسين لتأسيس الجمعية</p>
+            </div>
+            <i class="fa-solid fa-arrow-left text-gray-400 group-hover:text-orange-600 group-hover:-translate-x-1 transition"></i>
+          </a>
+
+          <div class="mt-10 grid grid-cols-3 gap-6">
+            <div class="flex flex-col items-center text-center" data-aos="fade-left" data-aos-duration="500">
+              <i class="fa-solid fa-calendar-days text-orange-500 text-3xl"></i>
+              <div class="mt-3 text-gray-900 text-3xl sm:text-4xl font-bold" dir="ltr"><span class="counter" data-target="1973">0</span></div>
+              <div class="text-gray-500 text-sm">سنة التأسيس</div>
+            </div>
+            <div class="flex flex-col items-center text-center" data-aos="fade-left" data-aos-duration="1000">
+              <i class="fa-solid fa-users text-orange-500 text-3xl"></i>
+              <div class="mt-3 text-gray-900 text-3xl sm:text-4xl font-bold" dir="ltr">+<span class="counter" data-target="600">0</span></div>
+              <div class="text-gray-500 text-sm">منتسب فعّال</div>
+            </div>
+            <div class="flex flex-col items-center text-center" data-aos="fade-left" data-aos-duration="1500">
+              <i class="fa-solid fa-hand-holding-heart text-orange-500 text-3xl"></i>
+              <div class="mt-3 text-gray-900 text-3xl sm:text-4xl font-bold" dir="ltr">+<span class="counter" data-target="20">0</span></div>
+              <div class="text-gray-500 text-sm">مبادرة سنويًا</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative h-[380px] sm:h-[420px]">
+          <div class="absolute inset-0 bottom-10 grid place-items-center">
+            <div class="relative h-[260px] w-[240px] transform -rotate-6" data-aos="zoom-in-up" data-aos-duration="1200">
+              <img src="images/5879693581667212228.jpg" alt="متطوعو ومنتسبو بيت شباب طرابلس في لقاء جماعي" class="polaroid absolute inset-0 h-full w-full">
+            </div>
+          </div>
+          <div class="absolute right-0 top-0 -z-10" data-aos="fade-right" data-aos-duration="800">
+            <img src="images/5879693581667212226.jpg" alt="محاضرة عالم الروبوتات" class="polaroid h-[190px] w-[160px] transform rotate-6">
+          </div>
+          <div class="absolute right-10 bottom-0 -z-10" data-aos="fade-right" data-aos-duration="1100">
+            <img src="images/5879693581667212231.jpg" alt="فعالية افتتاح موسم الصيف للشباب" class="polaroid h-[130px] w-[150px] transform -rotate-3">
+          </div>
+          <div class="absolute left-2 bottom-6 -z-10" data-aos="fade-left" data-aos-duration="600">
+            <img src="images/5879693581667212230.jpg" alt="تجهيز السلات الرمضانية" class="polaroid h-[170px] w-[120px] transform rotate-3">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-8 py-24">
+      <div class="flex flex-col items-center justify-center text-center">
+        <span class="eyebrow eyebrow-center text-sm" data-aos="zoom-in-up">مزايانا</span>
+        <h2 class="mt-4 text-gray-900 text-3xl font-bold max-w-md leading-normal" data-aos="zoom-in-up" data-aos-duration="500">
+          لماذا بيت شباب طرابلس؟
+        </h2>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14">
+
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="500">
+          <i class="fa-solid fa-shield-halved text-orange-600 text-4xl"></i>
+          <h3 class="mt-4 text-orange-600 text-lg font-bold">إقامة آمنة</h3>
+          <p class="mt-3 text-gray-600 leading-loose text-sm px-2">بيئة سكنية صحية وآمنة مهيأة لخدمة الشباب المنتسبين.</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="800">
+          <i class="fa-solid fa-people-group text-orange-600 text-4xl"></i>
+          <h3 class="mt-4 text-orange-600 text-lg font-bold">أنشطة شبابية</h3>
+          <p class="mt-3 text-gray-600 leading-loose text-sm px-2">برامج ثقافية ورياضية واجتماعية متجددة على مدار العام.</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="1100">
+          <i class="fa-solid fa-hand-holding-heart text-orange-600 text-4xl"></i>
+          <h3 class="mt-4 text-orange-600 text-lg font-bold">عمل تطوعي</h3>
+          <p class="mt-3 text-gray-600 leading-loose text-sm px-2">مبادرات مجتمعية تعزز روح العطاء والانتماء لدى الشباب.</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="1400">
+          <i class="fa-solid fa-globe text-orange-600 text-4xl"></i>
+          <h3 class="mt-4 text-orange-600 text-lg font-bold">تبادل شبابي</h3>
+          <p class="mt-3 text-gray-600 leading-loose text-sm px-2">فرص تواصل وتبادل خبرات مع شباب من مختلف مناطق ليبيا.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="join" class="max-w-6xl mx-auto px-4 sm:px-8 py-24">
+      <div class="flex flex-col items-start justify-start" data-aos="fade-right">
+        <span class="eyebrow eyebrow-start text-sm">كيف تنضم إلينا</span>
+        <h2 class="mt-4 text-gray-900 text-3xl font-bold max-w-md leading-normal">طرق الانتساب للبيت</h2>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-3 gap-10">
+
+        <div class="relative bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 p-7 text-center card-hover" data-aos="fade-up" data-aos-duration="500">
+          <span class="absolute -top-4 right-1/2 translate-x-1/2 w-8 h-8 rounded-full bg-gray-900 text-white text-sm font-bold flex items-center justify-center">1</span>
+          <i class="fa-solid fa-file-signature text-orange-600 text-3xl mt-3"></i>
+          <h3 class="mt-4 font-bold text-gray-900">تعبئة استمارة الانتساب</h3>
+          <p class="mt-2 text-sm text-gray-500 leading-relaxed">تعبئة استمارة الانتساب الإلكترونية أو الحضور مباشرة لمقر البيت.</p>
+        </div>
+
+        <div class="relative bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 p-7 text-center card-hover" data-aos="fade-up" data-aos-duration="900">
+          <span class="absolute -top-4 right-1/2 translate-x-1/2 w-8 h-8 rounded-full bg-gray-900 text-white text-sm font-bold flex items-center justify-center">2</span>
+          <i class="fa-solid fa-id-card text-orange-600 text-3xl mt-3"></i>
+          <h3 class="mt-4 font-bold text-gray-900">تقديم المستندات</h3>
+          <p class="mt-2 text-sm text-gray-500 leading-relaxed">إحضار بطاقة الهوية وصورتين شخصيتين لاستكمال ملف العضوية.</p>
+        </div>
+
+        <div class="relative bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 p-7 text-center card-hover" data-aos="fade-up" data-aos-duration="1300">
+          <span class="absolute -top-4 right-1/2 translate-x-1/2 w-8 h-8 rounded-full bg-gray-900 text-white text-sm font-bold flex items-center justify-center">3</span>
+          <i class="fa-solid fa-handshake text-orange-600 text-3xl mt-3"></i>
+          <h3 class="mt-4 font-bold text-gray-900">لقاء تعريفي</h3>
+          <p class="mt-2 text-sm text-gray-500 leading-relaxed">حضور جلسة تعريفية قصيرة بأنشطة البيت والانضمام رسميًا للأسرة.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="team" class="bg-gray-50 py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="eyebrow eyebrow-center text-sm" data-aos="zoom-in-up">فريقنا</span>
+          <h2 class="mt-4 text-gray-900 text-3xl font-bold leading-normal" data-aos="zoom-in-up" data-aos-duration="500">
+            فريق إدارة بيت شباب طرابلس
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+
+          <div class="bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 overflow-hidden card-hover text-center" data-aos="fade-up" data-aos-duration="500">
+            <div class="h-56 img-zoom">
+              <img src="images/5879693581667212277.jpg"
+                   alt="صورة أحمد جحيدر - مسؤول العضوية" class="w-full h-full object-cover object-top" loading="lazy">
+            </div>
+            <div class="py-5">
+              <h3 class="font-bold text-gray-900">أحمد جحيدر</h3>
+              <p class="text-sm text-orange-600 font-semibold mt-1">مسؤول العضوية</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 overflow-hidden card-hover text-center" data-aos="fade-up" data-aos-duration="900">
+            <div class="h-56 img-zoom">
+              <img src="images/5879693581667212276.jpg"
+                   alt="صورة معاذ فكري - مسؤول الإعلام" class="w-full h-full object-cover object-top" loading="lazy">
+            </div>
+            <div class="py-5">
+              <h3 class="font-bold text-gray-900">معاذ فكري</h3>
+              <p class="text-sm text-orange-600 font-semibold mt-1">مسؤول الإعلام</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-300/20 overflow-hidden card-hover text-center" data-aos="fade-up" data-aos-duration="1300">
+            <div class="h-56 img-zoom">
+              <img src="images/5879693581667212273.jpg"
+                   alt="صورة إسماعيل بلقاسم - مسؤول النشاط" class="w-full h-full object-cover object-top" loading="lazy">
+            </div>
+            <div class="py-5">
+              <h3 class="font-bold text-gray-900">إسماعيل بلقاسم</h3>
+              <p class="text-sm text-orange-600 font-semibold mt-1">مسؤول النشاط</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="activities" class="max-w-6xl mx-auto px-4 sm:px-8 py-24">
+      <div class="flex flex-col items-start justify-start mb-14" data-aos="fade-right">
+        <span class="eyebrow eyebrow-start text-sm">مركز الإعلام</span>
+        <h2 class="mt-4 text-gray-900 text-3xl font-bold max-w-md leading-normal">من أبرز نشاطاتنا</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="500">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212233.jpg" alt="طفل يشارك في مسابقة حفظ القرآن الكريم والخطابة والأذان" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">فعاليات دينية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">مسابقة حفظ القرآن الكريم</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">مشاركة بيت شباب طرابلس في المسابقة الرمضانية لحفظ القرآن الكريم والخطابة والأذان، ضمن أجواء إيمانية وتنافسية.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="700">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212234.jpg" alt="متطوعو بيت شباب طرابلس يوزعون وجبات الإفطار على السائقين ضمن حملة تراحموا" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">مبادرات تطوعية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">حملة "تراحموا" لإفطار الصائمين</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">مبادرة رمضانية تطوعية لإفطار الصائمين، وتعزيز قيم التكافل والتراحم وروح العطاء في المجتمع.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="900">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212230.jpg" alt="متطوع من بيت شباب طرابلس يجهّز السلات الرمضانية للتوزيع" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">مبادرات تطوعية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">حملة السلات الرمضانية</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">تجهيز وتوزيع السلات الرمضانية وإفطار الصائمين، دعمًا للأسر المحتاجة وتعزيزًا لقيم التكافل والعطاء.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="1100">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212229.jpg" alt="متطوعو بيت شباب طرابلس خلال حملة تشجير بمناسبة الذكرى 53" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">بيئة</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">حملة تشجير</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">مبادرة تطوعية لزراعة 53 شتلة بمناسبة الذكرى الـ53 لتأسيس الجمعية، تعزيزًا للوعي البيئي وروح العمل التطوعي.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="1300">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212227.jpg" alt="منتسبو بيت شباب طرابلس في حفل الذكرى 53 لتأسيس جمعية بيوت الشباب الليبية" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">مناسبات</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">الذكرى الـ53 لتأسيس الجمعية</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">احتفل منتسبو بيت شباب طرابلس بالذكرى الـ53 لتأسيس جمعية بيوت الشباب الليبية، في أجواء من الفخر والانتماء.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="1500">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212226.jpg" alt="محاضر يقدّم محاضرة تعريفية عن عالم الروبوتات لشباب بيت طرابلس" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">ورش تدريبية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">محاضرة عالم الروبوتات</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">محاضرة تعريفية حول الروبوتات وتطبيقاتها، وتشجيع الشباب على استكشاف مجالات التقنية والابتكار.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="500">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212232.jpg" alt="محاضر يشرح أساسيات الأمن السيبراني وحماية كلمات المرور في ورشة تدريبية" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">ورش تدريبية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">ورشة الأمن السيبراني</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">ورشة توعوية حول الأمن السيبراني، لتعريف الشباب بأساسيات الحماية الرقمية والوقاية من التهديدات الإلكترونية.</p>
+          </div>
+        </article>
+
+        <article class="rounded-xl shadow-lg shadow-gray-300/20 card-hover" data-aos="fade-up" data-aos-duration="800">
+          <div class="relative w-full h-52 img-zoom gallery-item">
+            <img src="images/5879693581667212231.jpg" alt="فعالية افتتاح موسم الصيف للشباب على المسرح" class="absolute inset-0 h-full w-full object-cover rounded-t-xl">
+          </div>
+          <div class="bg-white pt-4 pb-6 px-5 border border-t-0 border-gray-100 rounded-b-xl">
+            <span class="text-orange-600 text-sm font-semibold">فعاليات شبابية</span>
+            <p class="mt-1 text-gray-900 font-bold leading-snug">موسم الصيف للشباب</p>
+            <p class="mt-2 text-sm text-gray-500 leading-relaxed">مشاركة بيت شباب طرابلس في افتتاح فعاليات موسم الصيف للشباب، في أجواء شبابية مليئة بالحماس والتفاعل.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="partners" class="bg-white py-20 border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+        <span class="eyebrow eyebrow-start text-sm" data-aos="fade-up">بدعم من</span>
+        <h2 class="mt-4 mb-12 text-gray-900 text-3xl font-bold leading-normal" data-aos="fade-up">شركاؤنا</h2>
+
+        <div class="grid grid-cols-2 gap-x-10 gap-y-10 items-center justify-items-center" data-aos="fade-up">
+          <a href="http://youth.gov.ly/" target="_blank" rel="noopener" class="transition hover:opacity-80">
+            <img src="images/youth-ministry-logo.png" alt="وزارة الشباب" class="max-h-14 w-auto object-contain">
+          </a>
+          <a href="https://hihostels.com" target="_blank" rel="noopener" class="transition hover:opacity-80">
+            <img src="images/international-hostelling-logo.png" alt="Hostelling International" class="max-h-14 w-auto object-contain">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-8 pb-24">
+      <div class="bg-gray-900 rounded-3xl px-8 py-16 text-center relative overflow-hidden" data-aos="zoom-in">
+        <div class="absolute inset-0 dot-grid opacity-30"></div>
+        <div class="relative z-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">هل لديك استفسار أو ترغب بالانضمام؟</h2>
+          <p class="text-white/60 max-w-xl mx-auto mb-8 text-sm md:text-base">
+            فريقنا جاهز للإجابة عن جميع استفساراتكم المتعلقة بالعضوية والأنشطة والفعاليات.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-6 mb-8 text-white/80 text-sm">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-500"></i> tripoliyouthhostels@gmail.com</span>
+            <span class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-500"></i> طرابلس، ليبيا</span>
+          </div>
+
+          <a href="mailto:tripoliyouthhostels@gmail.com" class="inline-block rounded-full bg-orange-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 active:scale-95 transition">
+            راسلنا الآن
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-900 pt-16 pb-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="flex flex-col items-center gap-6 pb-10 border-b border-gray-700 text-center">
+        <div class="flex items-center gap-3">
+          <img src="images/logo-mark-transparent.png" alt="شعار جمعية بيوت الشباب الليبية" class="w-11 h-11 object-contain">
+          <h3 class="text-white font-extrabold">بيت شباب طرابلس</h3>
+        </div>
+        <p class="text-white/50 text-sm max-w-md leading-relaxed">
+          أحد بيوت الشباب التابعة لجمعية بيوت الشباب الليبية، يعمل منذ 1973 على رعاية الشباب وتنمية مهاراتهم.
+        </p>
+
+        <div>
+          <p class="text-white text-xs font-extrabold mb-3">تابع نشاطاتنا على</p>
+          <div class="flex gap-2.5 justify-center">
+            <a href="https://www.facebook.com/share/19LCNVLcBM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="فيسبوك" class="social-btn w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+            <a href="https://www.tiktok.com/@tripoli.youth.hos?_r=1&_t=ZS-99y7iBDRoXf" target="_blank" rel="noopener" aria-label="تيك توك" class="social-btn w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center"><i class="fa-brands fa-tiktok text-sm"></i></a>
+            <a href="https://youtube.com/@byootly?si=uIV-wqHK8crAoENZ" target="_blank" rel="noopener" aria-label="يوتيوب" class="social-btn w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center"><i class="fa-brands fa-youtube text-sm"></i></a>
+          </div>
+        </div>
+
+        <a href="mailto:tripoliyouthhostels@gmail.com" class="text-white/70 text-sm hover:text-orange-500 transition flex items-center gap-2">
+          <i class="fa-solid fa-envelope"></i> تواصل معنا عبر البريد الإلكتروني: tripoliyouthhostels@gmail.com
+        </a>
+      </div>
+
+      <p class="text-white/40 text-xs md:text-sm text-center pt-6">
+        © 2026 جميع الحقوق محفوظة. بيت شباب طرابلس - جمعية بيوت الشباب الليبية.
+      </p>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-label="العودة للأعلى"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <div id="lightbox">
+    <button id="lightboxClose" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+    <img id="lightboxImg" src="" alt="عرض مكبّر للصورة">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    (function () {
+      const loader = document.getElementById('loader');
+      const fill = document.getElementById('loaderFill');
+      const percent = document.getElementById('loaderPercent');
+      const imgs = Array.from(document.images);
+      const startTime = performance.now();
+      const MIN_TIME = 900, MAX_TIME = 7000;
+      let shown = 0, pageLoaded = false, finished = false;
+
+      function targetProgress() {
+        if (pageLoaded) return 100;
+        const done = imgs.filter(img => img.complete).length;
+        const real = imgs.length ? (done / imgs.length) * 90 : 90;
+        const creep = Math.min(60, (performance.now() - startTime) / 40);
+        return Math.max(real, creep);
+      }
+
+      function tick() {
+        const elapsed = performance.now() - startTime;
+        if (elapsed > MAX_TIME) pageLoaded = true;
+        shown += (targetProgress() - shown) * 0.08;
+        if (pageLoaded && 100 - shown < 0.5) shown = 100;
+        fill.style.transform = `scaleX(${shown / 100})`;
+        percent.textContent = Math.round(shown) + '%';
+        if (shown >= 100 && elapsed >= MIN_TIME) return finish();
+        requestAnimationFrame(tick);
+      }
+
+      function finish() {
+        if (finished) return;
+        finished = true;
+        setTimeout(() => {
+          loader.classList.add('is-done');
+          setTimeout(() => loader.remove(), 900);
+        }, 150);
+      }
+
+      window.addEventListener('load', () => { pageLoaded = true; });
+      requestAnimationFrame(tick);
+    })();
+
+    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
+
+    const scrollProgress = document.getElementById('scrollProgress');
+    function updateScrollProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    }
+
+    const mainHeader = document.getElementById('mainHeader');
+    const backToTop = document.getElementById('backToTop');
+    function handleScroll() {
+      updateScrollProgress();
+      mainHeader.classList.toggle('scrolled', window.scrollY > 20);
+      backToTop.classList.toggle('show', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const spySections = document.querySelectorAll('main section[id]');
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    spySections.forEach(sec => spyObserver.observe(sec));
+
+    const heroDots = document.getElementById('heroDots');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (heroDots && !prefersReducedMotion) {
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < 700) heroDots.style.transform = `translateY(${y * 0.15}px)`;
+      }, { passive: true });
+    }
+
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerClose');
+    function openDrawer() { menuOverlay.classList.add('open'); mobileDrawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeDrawer() { menuOverlay.classList.remove('open'); mobileDrawer.classList.remove('open'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    menuOverlay.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawer-link').forEach(link => link.addEventListener('click', closeDrawer));
+
+    const counters = document.querySelectorAll('.counter');
+    const animateCounter = (el) => {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1400;
+      const start = performance.now();
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString('en-US');
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString('en-US');
+      }
+      requestAnimationFrame(step);
+    };
+    const statsObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { counters.forEach(animateCounter); obs.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    if (counters.length) statsObserver.observe(counters[0]);
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
